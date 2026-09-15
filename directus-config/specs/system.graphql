@@ -287,7 +287,6 @@ type Subscription {
   directus_settings_mutated(event: EventEnum): directus_settings_mutated
   directus_deployment_projects_mutated(event: EventEnum): directus_deployment_projects_mutated
   Test_mutated(event: EventEnum): Test_mutated
-  Block_Grid_mutated(event: EventEnum): Block_Grid_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -356,18 +355,6 @@ type auth_tokens {
   access_token: String
   expires: GraphQLBigInt
   refresh_token: String
-}
-
-type Block_Grid {
-  id: ID!
-  test1: String
-  test2: String
-}
-
-type Block_Grid_mutated {
-  key: ID!
-  event: EventEnum
-  data: Block_Grid
 }
 
 type count_functions {
