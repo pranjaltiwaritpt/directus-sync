@@ -11,6 +11,10 @@ type Query {
   Block_Grid_by_id(id: ID!, version: String): Block_Grid
   Block_Grid_aggregated(groupBy: [String], filter: Block_Grid_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [Block_Grid_aggregated!]!
   Block_Grid_by_version(version: String!, id: ID!): version_Block_Grid
+  Rollback_Fields(filter: Rollback_Fields_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [Rollback_Fields!]!
+  Rollback_Fields_by_id(id: ID!, version: String): Rollback_Fields
+  Rollback_Fields_aggregated(groupBy: [String], filter: Rollback_Fields_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [Rollback_Fields_aggregated!]!
+  Rollback_Fields_by_version(version: String!, id: ID!): version_Rollback_Fields
 }
 
 type Mutation {
@@ -20,6 +24,8 @@ type Mutation {
   create_Test_item(data: create_Test_input!): Test
   create_Block_Grid_items(filter: Block_Grid_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_Block_Grid_input!]): [Block_Grid!]!
   create_Block_Grid_item(data: create_Block_Grid_input!): Block_Grid
+  create_Rollback_Fields_items(filter: Rollback_Fields_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_Rollback_Fields_input!]): [Rollback_Fields!]!
+  create_Rollback_Fields_item(data: create_Rollback_Fields_input!): Rollback_Fields
   update_directus_sync_id_map_items(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_sync_id_map_input!): [directus_sync_id_map!]!
   update_directus_sync_id_map_batch(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_sync_id_map_input!]): [directus_sync_id_map!]!
   update_directus_sync_id_map_item(id: ID!, data: update_directus_sync_id_map_input!): directus_sync_id_map
@@ -29,12 +35,17 @@ type Mutation {
   update_Block_Grid_items(filter: Block_Grid_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_Block_Grid_input!): [Block_Grid!]!
   update_Block_Grid_batch(filter: Block_Grid_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_Block_Grid_input!]): [Block_Grid!]!
   update_Block_Grid_item(id: ID!, data: update_Block_Grid_input!): Block_Grid
+  update_Rollback_Fields_items(filter: Rollback_Fields_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_Rollback_Fields_input!): [Rollback_Fields!]!
+  update_Rollback_Fields_batch(filter: Rollback_Fields_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_Rollback_Fields_input!]): [Rollback_Fields!]!
+  update_Rollback_Fields_item(id: ID!, data: update_Rollback_Fields_input!): Rollback_Fields
   delete_directus_sync_id_map_items(ids: [ID]!): delete_many
   delete_directus_sync_id_map_item(id: ID!): delete_one
   delete_Test_items(ids: [ID]!): delete_many
   delete_Test_item(id: ID!): delete_one
   delete_Block_Grid_items(ids: [ID]!): delete_many
   delete_Block_Grid_item(id: ID!): delete_one
+  delete_Rollback_Fields_items(ids: [ID]!): delete_many
+  delete_Rollback_Fields_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -64,6 +75,7 @@ type Subscription {
   directus_deployment_projects_mutated(event: EventEnum): directus_deployment_projects_mutated
   Test_mutated(event: EventEnum): Test_mutated
   Block_Grid_mutated(event: EventEnum): Block_Grid_mutated
+  Rollback_Fields_mutated(event: EventEnum): Rollback_Fields_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -818,6 +830,41 @@ type directus_versions_mutated {
   data: directus_versions
 }
 
+type Rollback_Fields {
+  id: ID!
+  test1: String
+  test2: String
+}
+
+type Rollback_Fields_aggregated {
+  group: JSON
+  countAll: Int
+  count: Rollback_Fields_aggregated_count
+  countDistinct: Rollback_Fields_aggregated_count
+  avg: Rollback_Fields_aggregated_fields
+  sum: Rollback_Fields_aggregated_fields
+  avgDistinct: Rollback_Fields_aggregated_fields
+  sumDistinct: Rollback_Fields_aggregated_fields
+  min: Rollback_Fields_aggregated_fields
+  max: Rollback_Fields_aggregated_fields
+}
+
+type Rollback_Fields_aggregated_count {
+  id: Int
+  test1: Int
+  test2: Int
+}
+
+type Rollback_Fields_aggregated_fields {
+  id: Float
+}
+
+type Rollback_Fields_mutated {
+  key: ID!
+  event: EventEnum
+  data: Rollback_Fields
+}
+
 type Test {
   id: ID!
 }
@@ -863,6 +910,13 @@ type version_directus_sync_id_map {
   sync_id: String
   local_id: String
   created_at: Date
+}
+
+""""""
+type version_Rollback_Fields {
+  id: ID
+  test1: String
+  test2: String
 }
 
 """"""
@@ -916,6 +970,12 @@ input create_directus_sync_id_map_input {
   sync_id: String!
   local_id: String!
   created_at: Date
+}
+
+input create_Rollback_Fields_input {
+  id: ID
+  test1: String
+  test2: String
 }
 
 input create_Test_input {
@@ -1530,6 +1590,14 @@ input number_filter_operators {
   _nbetween: [GraphQLStringOrFloat]
 }
 
+input Rollback_Fields_filter {
+  id: number_filter_operators
+  test1: string_filter_operators
+  test2: string_filter_operators
+  _and: [Rollback_Fields_filter]
+  _or: [Rollback_Fields_filter]
+}
+
 input string_filter_operators {
   _eq: String
   _neq: String
@@ -1570,6 +1638,12 @@ input update_directus_sync_id_map_input {
   sync_id: String
   local_id: String
   created_at: Date
+}
+
+input update_Rollback_Fields_input {
+  id: ID
+  test1: String
+  test2: String
 }
 
 input update_Test_input {

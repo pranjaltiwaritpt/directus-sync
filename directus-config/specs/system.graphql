@@ -288,6 +288,7 @@ type Subscription {
   directus_deployment_projects_mutated(event: EventEnum): directus_deployment_projects_mutated
   Test_mutated(event: EventEnum): Test_mutated
   Block_Grid_mutated(event: EventEnum): Block_Grid_mutated
+  Rollback_Fields_mutated(event: EventEnum): Rollback_Fields_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -1761,6 +1762,18 @@ type policy_me_globals_type {
   enforce_tfa: Boolean
   app_access: Boolean
   admin_access: Boolean
+}
+
+type Rollback_Fields {
+  id: ID!
+  test1: String
+  test2: String
+}
+
+type Rollback_Fields_mutated {
+  key: ID!
+  event: EventEnum
+  data: Rollback_Fields
 }
 
 type server_info {
