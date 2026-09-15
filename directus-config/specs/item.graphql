@@ -7,6 +7,10 @@ type Query {
   Test_by_id(id: ID!, version: String): Test
   Test_aggregated(groupBy: [String], filter: Test_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [Test_aggregated!]!
   Test_by_version(version: String!, id: ID!): version_Test
+  Block_Grid(filter: Block_Grid_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [Block_Grid!]!
+  Block_Grid_by_id(id: ID!, version: String): Block_Grid
+  Block_Grid_aggregated(groupBy: [String], filter: Block_Grid_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [Block_Grid_aggregated!]!
+  Block_Grid_by_version(version: String!, id: ID!): version_Block_Grid
 }
 
 type Mutation {
@@ -14,16 +18,23 @@ type Mutation {
   create_directus_sync_id_map_item(data: create_directus_sync_id_map_input!): directus_sync_id_map
   create_Test_items(filter: Test_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_Test_input!]): [Test!]!
   create_Test_item(data: create_Test_input!): Test
+  create_Block_Grid_items(filter: Block_Grid_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_Block_Grid_input!]): [Block_Grid!]!
+  create_Block_Grid_item(data: create_Block_Grid_input!): Block_Grid
   update_directus_sync_id_map_items(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_sync_id_map_input!): [directus_sync_id_map!]!
   update_directus_sync_id_map_batch(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_sync_id_map_input!]): [directus_sync_id_map!]!
   update_directus_sync_id_map_item(id: ID!, data: update_directus_sync_id_map_input!): directus_sync_id_map
   update_Test_items(filter: Test_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_Test_input!): [Test!]!
   update_Test_batch(filter: Test_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_Test_input!]): [Test!]!
   update_Test_item(id: ID!, data: update_Test_input!): Test
+  update_Block_Grid_items(filter: Block_Grid_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_Block_Grid_input!): [Block_Grid!]!
+  update_Block_Grid_batch(filter: Block_Grid_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_Block_Grid_input!]): [Block_Grid!]!
+  update_Block_Grid_item(id: ID!, data: update_Block_Grid_input!): Block_Grid
   delete_directus_sync_id_map_items(ids: [ID]!): delete_many
   delete_directus_sync_id_map_item(id: ID!): delete_one
   delete_Test_items(ids: [ID]!): delete_many
   delete_Test_item(id: ID!): delete_one
+  delete_Block_Grid_items(ids: [ID]!): delete_many
+  delete_Block_Grid_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -52,6 +63,7 @@ type Subscription {
   directus_settings_mutated(event: EventEnum): directus_settings_mutated
   directus_deployment_projects_mutated(event: EventEnum): directus_deployment_projects_mutated
   Test_mutated(event: EventEnum): Test_mutated
+  Block_Grid_mutated(event: EventEnum): Block_Grid_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -98,6 +110,41 @@ enum EventEnum {
   create
   update
   delete
+}
+
+type Block_Grid {
+  id: ID!
+  test1: String
+  test2: String
+}
+
+type Block_Grid_aggregated {
+  group: JSON
+  countAll: Int
+  count: Block_Grid_aggregated_count
+  countDistinct: Block_Grid_aggregated_count
+  avg: Block_Grid_aggregated_fields
+  sum: Block_Grid_aggregated_fields
+  avgDistinct: Block_Grid_aggregated_fields
+  sumDistinct: Block_Grid_aggregated_fields
+  min: Block_Grid_aggregated_fields
+  max: Block_Grid_aggregated_fields
+}
+
+type Block_Grid_aggregated_count {
+  id: Int
+  test1: Int
+  test2: Int
+}
+
+type Block_Grid_aggregated_fields {
+  id: Float
+}
+
+type Block_Grid_mutated {
+  key: ID!
+  event: EventEnum
+  data: Block_Grid
 }
 
 type count_functions {
@@ -803,6 +850,13 @@ type Test_mutated {
 }
 
 """"""
+type version_Block_Grid {
+  id: ID
+  test1: String
+  test2: String
+}
+
+""""""
 type version_directus_sync_id_map {
   id: ID
   table: String
@@ -831,6 +885,14 @@ input big_int_filter_operators {
   _nbetween: [GraphQLBigInt]
 }
 
+input Block_Grid_filter {
+  id: number_filter_operators
+  test1: string_filter_operators
+  test2: string_filter_operators
+  _and: [Block_Grid_filter]
+  _or: [Block_Grid_filter]
+}
+
 input boolean_filter_operators {
   _eq: Boolean
   _neq: Boolean
@@ -840,6 +902,12 @@ input boolean_filter_operators {
 
 input count_function_filter_operators {
   count: number_filter_operators
+}
+
+input create_Block_Grid_input {
+  id: ID
+  test1: String
+  test2: String
 }
 
 input create_directus_sync_id_map_input {
@@ -1488,6 +1556,12 @@ input Test_filter {
   id: number_filter_operators
   _and: [Test_filter]
   _or: [Test_filter]
+}
+
+input update_Block_Grid_input {
+  id: ID
+  test1: String
+  test2: String
 }
 
 input update_directus_sync_id_map_input {
