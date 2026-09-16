@@ -116,6 +116,7 @@ type Block_Grid {
   id: ID!
   test1: String
   test2: String
+  test3: String
 }
 
 type Block_Grid_aggregated {
@@ -135,6 +136,7 @@ type Block_Grid_aggregated_count {
   id: Int
   test1: Int
   test2: Int
+  test3: Int
 }
 
 type Block_Grid_aggregated_fields {
@@ -854,6 +856,7 @@ type version_Block_Grid {
   id: ID
   test1: String
   test2: String
+  test3: String
 }
 
 """"""
@@ -889,6 +892,7 @@ input Block_Grid_filter {
   id: number_filter_operators
   test1: string_filter_operators
   test2: string_filter_operators
+  test3: string_filter_operators
   _and: [Block_Grid_filter]
   _or: [Block_Grid_filter]
 }
@@ -908,6 +912,7 @@ input create_Block_Grid_input {
   id: ID
   test1: String
   test2: String
+  test3: String
 }
 
 input create_directus_sync_id_map_input {
@@ -1562,6 +1567,7 @@ input update_Block_Grid_input {
   id: ID
   test1: String
   test2: String
+  test3: String
 }
 
 input update_directus_sync_id_map_input {

@@ -362,6 +362,7 @@ type Block_Grid {
   id: ID!
   test1: String
   test2: String
+  test3: String
 }
 
 type Block_Grid_mutated {
