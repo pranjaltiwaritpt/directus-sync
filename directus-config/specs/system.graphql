@@ -363,6 +363,10 @@ type Block_Grid {
   test1: String
   test2: String
   test3: String
+  date_created: Date
+  date_created_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
 }
 
 type Block_Grid_mutated {

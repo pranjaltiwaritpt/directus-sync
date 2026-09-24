@@ -3,7 +3,7 @@
   "info": {
     "title": "Dynamic API Specification",
     "description": "This is a dynamically generated API specification for all endpoints existing on the current project.",
-    "version": "db5a69d9aaf0a1e8f18e00f447ab497c7ed99901"
+    "version": "148e903e829e580185009a1c3e96314c3501b636"
   },
   "servers": [
     {
@@ -10404,6 +10404,16 @@
           "test3": {
             "nullable": true,
             "type": "string"
+          },
+          "date_created": {
+            "nullable": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          "date_updated": {
+            "nullable": true,
+            "type": "string",
+            "format": "date-time"
           }
         },
         "x-collection": "Block_Grid"

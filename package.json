@@ -19,5 +19,9 @@
   "homepage": "https://github.com/pranjaltiwaritpt/directus-sync#readme",
   "devDependencies": {
     "directus-sync": "^3.5.1"
+  },
+  "type": "module", 
+  "dependencies": {
+    "@directus/sdk": "^26.0.0"
   }
 }

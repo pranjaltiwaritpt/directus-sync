@@ -117,6 +117,10 @@ type Block_Grid {
   test1: String
   test2: String
   test3: String
+  date_created: Date
+  date_created_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
 }
 
 type Block_Grid_aggregated {
@@ -137,6 +141,8 @@ type Block_Grid_aggregated_count {
   test1: Int
   test2: Int
   test3: Int
+  date_created: Int
+  date_updated: Int
 }
 
 type Block_Grid_aggregated_fields {
@@ -857,6 +863,8 @@ type version_Block_Grid {
   test1: String
   test2: String
   test3: String
+  date_created: Date
+  date_updated: Date
 }
 
 """"""
@@ -893,6 +901,10 @@ input Block_Grid_filter {
   test1: string_filter_operators
   test2: string_filter_operators
   test3: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
   _and: [Block_Grid_filter]
   _or: [Block_Grid_filter]
 }
@@ -913,6 +925,8 @@ input create_Block_Grid_input {
   test1: String
   test2: String
   test3: String
+  date_created: Date
+  date_updated: Date
 }
 
 input create_directus_sync_id_map_input {
@@ -1568,6 +1582,8 @@ input update_Block_Grid_input {
   test1: String
   test2: String
   test3: String
+  date_created: Date
+  date_updated: Date
 }
 
 input update_directus_sync_id_map_input {
