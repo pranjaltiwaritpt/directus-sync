@@ -10,7 +10,7 @@ import {
 } from '@directus/sdk';
 
 // configuration
-const PROD_URL = 'https://directus-sync.onrender.com/'; // Replace with your Render URL
+const PROD_URL = 'https://directus-sync.onrender.com/'; 
 const PROD_EMAIL = 'admin@example.com';
 const PROD_PASSWORD = 'password';
 
@@ -18,7 +18,7 @@ const DEV_URL = 'http://localhost:8055';
 const DEV_EMAIL = 'admin@example.com';
 const DEV_PASSWORD = 'password';
 
-const COLLECTION = 'Block_Grid'; // The exact name of the collection you want to sync
+const COLLECTION = ['Block_Grid', 'Test']; 
 const STATE_FILE = './sync-state.json';
 
 // initialize Directus clients for both environments
@@ -45,13 +45,7 @@ async function runSync() {
     // We check for items where date_updated OR date_created is newer than our last sync
     const changedItems = await prodClient.request(
       readItems(COLLECTION, {
-        filter: {
-          _or: [
-            { date_updated: { _gt: lastSyncDate } },
-            { date_created: { _gt: lastSyncDate } }
-          ]
-        },
-        limit: -1, // Fetch all matching items
+        limit: -1, 
       })
     );
 

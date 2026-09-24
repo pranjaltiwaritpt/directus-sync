@@ -3,38 +3,38 @@ type Query {
   directus_sync_id_map_by_id(id: ID!, version: String): directus_sync_id_map
   directus_sync_id_map_aggregated(groupBy: [String], filter: directus_sync_id_map_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [directus_sync_id_map_aggregated!]!
   directus_sync_id_map_by_version(version: String!, id: ID!): version_directus_sync_id_map
-  Test(filter: Test_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [Test!]!
-  Test_by_id(id: ID!, version: String): Test
-  Test_aggregated(groupBy: [String], filter: Test_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [Test_aggregated!]!
-  Test_by_version(version: String!, id: ID!): version_Test
   Block_Grid(filter: Block_Grid_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [Block_Grid!]!
   Block_Grid_by_id(id: ID!, version: String): Block_Grid
   Block_Grid_aggregated(groupBy: [String], filter: Block_Grid_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [Block_Grid_aggregated!]!
   Block_Grid_by_version(version: String!, id: ID!): version_Block_Grid
+  Test(filter: Test_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [Test!]!
+  Test_by_id(id: ID!, version: String): Test
+  Test_aggregated(groupBy: [String], filter: Test_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [Test_aggregated!]!
+  Test_by_version(version: String!, id: ID!): version_Test
 }
 
 type Mutation {
   create_directus_sync_id_map_items(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_directus_sync_id_map_input!]): [directus_sync_id_map!]!
   create_directus_sync_id_map_item(data: create_directus_sync_id_map_input!): directus_sync_id_map
-  create_Test_items(filter: Test_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_Test_input!]): [Test!]!
-  create_Test_item(data: create_Test_input!): Test
   create_Block_Grid_items(filter: Block_Grid_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_Block_Grid_input!]): [Block_Grid!]!
   create_Block_Grid_item(data: create_Block_Grid_input!): Block_Grid
+  create_Test_items(filter: Test_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_Test_input!]): [Test!]!
+  create_Test_item(data: create_Test_input!): Test
   update_directus_sync_id_map_items(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_sync_id_map_input!): [directus_sync_id_map!]!
   update_directus_sync_id_map_batch(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_sync_id_map_input!]): [directus_sync_id_map!]!
   update_directus_sync_id_map_item(id: ID!, data: update_directus_sync_id_map_input!): directus_sync_id_map
-  update_Test_items(filter: Test_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_Test_input!): [Test!]!
-  update_Test_batch(filter: Test_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_Test_input!]): [Test!]!
-  update_Test_item(id: ID!, data: update_Test_input!): Test
   update_Block_Grid_items(filter: Block_Grid_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_Block_Grid_input!): [Block_Grid!]!
   update_Block_Grid_batch(filter: Block_Grid_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_Block_Grid_input!]): [Block_Grid!]!
   update_Block_Grid_item(id: ID!, data: update_Block_Grid_input!): Block_Grid
+  update_Test_items(filter: Test_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_Test_input!): [Test!]!
+  update_Test_batch(filter: Test_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_Test_input!]): [Test!]!
+  update_Test_item(id: ID!, data: update_Test_input!): Test
   delete_directus_sync_id_map_items(ids: [ID]!): delete_many
   delete_directus_sync_id_map_item(id: ID!): delete_one
-  delete_Test_items(ids: [ID]!): delete_many
-  delete_Test_item(id: ID!): delete_one
   delete_Block_Grid_items(ids: [ID]!): delete_many
   delete_Block_Grid_item(id: ID!): delete_one
+  delete_Test_items(ids: [ID]!): delete_many
+  delete_Test_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -62,8 +62,8 @@ type Subscription {
   directus_deployment_runs_mutated(event: EventEnum): directus_deployment_runs_mutated
   directus_settings_mutated(event: EventEnum): directus_settings_mutated
   directus_deployment_projects_mutated(event: EventEnum): directus_deployment_projects_mutated
-  Test_mutated(event: EventEnum): Test_mutated
   Block_Grid_mutated(event: EventEnum): Block_Grid_mutated
+  Test_mutated(event: EventEnum): Test_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -828,6 +828,10 @@ type directus_versions_mutated {
 
 type Test {
   id: ID!
+  test_field: String
+  test_textarea: String
+  date_created: String
+  date_updated: String
 }
 
 type Test_aggregated {
@@ -845,6 +849,10 @@ type Test_aggregated {
 
 type Test_aggregated_count {
   id: Int
+  test_field: Int
+  test_textarea: Int
+  date_created: Int
+  date_updated: Int
 }
 
 type Test_aggregated_fields {
@@ -879,6 +887,10 @@ type version_directus_sync_id_map {
 """"""
 type version_Test {
   id: ID
+  test_field: String
+  test_textarea: String
+  date_created: String
+  date_updated: String
 }
 
 input big_int_filter_operators {
@@ -939,6 +951,10 @@ input create_directus_sync_id_map_input {
 
 input create_Test_input {
   id: ID
+  test_field: String
+  test_textarea: String
+  date_created: String
+  date_updated: String
 }
 
 input date_filter_operators {
@@ -1573,6 +1589,10 @@ input string_filter_operators {
 
 input Test_filter {
   id: number_filter_operators
+  test_field: string_filter_operators
+  test_textarea: string_filter_operators
+  date_created: string_filter_operators
+  date_updated: string_filter_operators
   _and: [Test_filter]
   _or: [Test_filter]
 }
@@ -1596,4 +1616,8 @@ input update_directus_sync_id_map_input {
 
 input update_Test_input {
   id: ID
+  test_field: String
+  test_textarea: String
+  date_created: String
+  date_updated: String
 }

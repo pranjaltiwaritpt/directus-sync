@@ -286,8 +286,8 @@ type Subscription {
   directus_deployment_runs_mutated(event: EventEnum): directus_deployment_runs_mutated
   directus_settings_mutated(event: EventEnum): directus_settings_mutated
   directus_deployment_projects_mutated(event: EventEnum): directus_deployment_projects_mutated
-  Test_mutated(event: EventEnum): Test_mutated
   Block_Grid_mutated(event: EventEnum): Block_Grid_mutated
+  Test_mutated(event: EventEnum): Test_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -1797,6 +1797,10 @@ type server_info_query_limit {
 
 type Test {
   id: ID!
+  test_field: String
+  test_textarea: String
+  date_created: String
+  date_updated: String
 }
 
 type Test_mutated {
