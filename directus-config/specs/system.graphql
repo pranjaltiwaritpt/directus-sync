@@ -1799,8 +1799,10 @@ type Test {
   id: ID!
   test_field: String
   test_textarea: String
-  date_created: String
-  date_updated: String
+  date_created: Date
+  date_created_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
 }
 
 type Test_mutated {

@@ -830,8 +830,10 @@ type Test {
   id: ID!
   test_field: String
   test_textarea: String
-  date_created: String
-  date_updated: String
+  date_created: Date
+  date_created_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
 }
 
 type Test_aggregated {
@@ -889,8 +891,8 @@ type version_Test {
   id: ID
   test_field: String
   test_textarea: String
-  date_created: String
-  date_updated: String
+  date_created: Date
+  date_updated: Date
 }
 
 input big_int_filter_operators {
@@ -953,8 +955,8 @@ input create_Test_input {
   id: ID
   test_field: String
   test_textarea: String
-  date_created: String
-  date_updated: String
+  date_created: Date
+  date_updated: Date
 }
 
 input date_filter_operators {
@@ -1591,8 +1593,10 @@ input Test_filter {
   id: number_filter_operators
   test_field: string_filter_operators
   test_textarea: string_filter_operators
-  date_created: string_filter_operators
-  date_updated: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
   _and: [Test_filter]
   _or: [Test_filter]
 }
@@ -1618,6 +1622,6 @@ input update_Test_input {
   id: ID
   test_field: String
   test_textarea: String
-  date_created: String
-  date_updated: String
+  date_created: Date
+  date_updated: Date
 }

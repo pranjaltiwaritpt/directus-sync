@@ -3,7 +3,7 @@
   "info": {
     "title": "Dynamic API Specification",
     "description": "This is a dynamically generated API specification for all endpoints existing on the current project.",
-    "version": "29cfacd58c9905f580cf08337c1d585817a12b19"
+    "version": "c25b2677a329cb9a0db69bf22c23560bb24303b5"
   },
   "servers": [
     {
@@ -10425,11 +10425,13 @@
           },
           "date_created": {
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           },
           "date_updated": {
             "nullable": true,
-            "type": "string"
+            "type": "string",
+            "format": "date-time"
           }
         },
         "x-collection": "Test"
