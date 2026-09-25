@@ -19,7 +19,7 @@ const DEV_EMAIL = 'admin@example.com';
 const DEV_PASSWORD = 'password';
 
 // Use an array for multiple collections
-const COLLECTIONS = ['Block_Grid', 'Test']; 
+const COLLECTIONS = ['Block_Grid', 'Test', 'Blogs']; 
 const STATE_FILE = './sync-state.json';
 
 // initialize Directus clients for both environments
@@ -51,16 +51,10 @@ async function runSync() {
 
       // Fetch items from the production environment
       const changedItems = await prodClient.request(
-        readItems(collection, {
-          filter: {
-            _or: [
-              { date_updated: { _gt: lastSyncDate } },
-              { date_created: { _gt: lastSyncDate } }
-            ]
-          },
-          limit: -1, 
-        })
-      );
+      readItems(collection, {
+        limit: -1, 
+      })
+    );
 
       if (changedItems.length === 0) {
         console.log(`No new or updated items found in ${collection}.`);

@@ -11,6 +11,10 @@ type Query {
   Test_by_id(id: ID!, version: String): Test
   Test_aggregated(groupBy: [String], filter: Test_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [Test_aggregated!]!
   Test_by_version(version: String!, id: ID!): version_Test
+  Blogs(filter: Blogs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String): [Blogs!]!
+  Blogs_by_id(id: ID!, version: String): Blogs
+  Blogs_aggregated(groupBy: [String], filter: Blogs_filter, limit: Int, offset: Int, page: Int, search: String, sort: [String]): [Blogs_aggregated!]!
+  Blogs_by_version(version: String!, id: ID!): version_Blogs
 }
 
 type Mutation {
@@ -20,6 +24,8 @@ type Mutation {
   create_Block_Grid_item(data: create_Block_Grid_input!): Block_Grid
   create_Test_items(filter: Test_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_Test_input!]): [Test!]!
   create_Test_item(data: create_Test_input!): Test
+  create_Blogs_items(filter: Blogs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [create_Blogs_input!]): [Blogs!]!
+  create_Blogs_item(data: create_Blogs_input!): Blogs
   update_directus_sync_id_map_items(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_directus_sync_id_map_input!): [directus_sync_id_map!]!
   update_directus_sync_id_map_batch(filter: directus_sync_id_map_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_directus_sync_id_map_input!]): [directus_sync_id_map!]!
   update_directus_sync_id_map_item(id: ID!, data: update_directus_sync_id_map_input!): directus_sync_id_map
@@ -29,12 +35,17 @@ type Mutation {
   update_Test_items(filter: Test_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_Test_input!): [Test!]!
   update_Test_batch(filter: Test_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_Test_input!]): [Test!]!
   update_Test_item(id: ID!, data: update_Test_input!): Test
+  update_Blogs_items(filter: Blogs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, ids: [ID]!, data: update_Blogs_input!): [Blogs!]!
+  update_Blogs_batch(filter: Blogs_filter, sort: [String], limit: Int, offset: Int, page: Int, search: String, data: [update_Blogs_input!]): [Blogs!]!
+  update_Blogs_item(id: ID!, data: update_Blogs_input!): Blogs
   delete_directus_sync_id_map_items(ids: [ID]!): delete_many
   delete_directus_sync_id_map_item(id: ID!): delete_one
   delete_Block_Grid_items(ids: [ID]!): delete_many
   delete_Block_Grid_item(id: ID!): delete_one
   delete_Test_items(ids: [ID]!): delete_many
   delete_Test_item(id: ID!): delete_one
+  delete_Blogs_items(ids: [ID]!): delete_many
+  delete_Blogs_item(id: ID!): delete_one
 }
 
 type Subscription {
@@ -64,6 +75,7 @@ type Subscription {
   directus_deployment_projects_mutated(event: EventEnum): directus_deployment_projects_mutated
   Block_Grid_mutated(event: EventEnum): Block_Grid_mutated
   Test_mutated(event: EventEnum): Test_mutated
+  Blogs_mutated(event: EventEnum): Blogs_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -153,6 +165,49 @@ type Block_Grid_mutated {
   key: ID!
   event: EventEnum
   data: Block_Grid
+}
+
+type Blogs {
+  id: ID!
+  field1: String
+  textarea1: String
+  textarea2: String
+  date_created: Date
+  date_created_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
+}
+
+type Blogs_aggregated {
+  group: JSON
+  countAll: Int
+  count: Blogs_aggregated_count
+  countDistinct: Blogs_aggregated_count
+  avg: Blogs_aggregated_fields
+  sum: Blogs_aggregated_fields
+  avgDistinct: Blogs_aggregated_fields
+  sumDistinct: Blogs_aggregated_fields
+  min: Blogs_aggregated_fields
+  max: Blogs_aggregated_fields
+}
+
+type Blogs_aggregated_count {
+  id: Int
+  field1: Int
+  textarea1: Int
+  textarea2: Int
+  date_created: Int
+  date_updated: Int
+}
+
+type Blogs_aggregated_fields {
+  id: Float
+}
+
+type Blogs_mutated {
+  key: ID!
+  event: EventEnum
+  data: Blogs
 }
 
 type count_functions {
@@ -878,6 +933,16 @@ type version_Block_Grid {
 }
 
 """"""
+type version_Blogs {
+  id: ID
+  field1: String
+  textarea1: String
+  textarea2: String
+  date_created: Date
+  date_updated: Date
+}
+
+""""""
 type version_directus_sync_id_map {
   id: ID
   table: String
@@ -923,6 +988,19 @@ input Block_Grid_filter {
   _or: [Block_Grid_filter]
 }
 
+input Blogs_filter {
+  id: number_filter_operators
+  field1: string_filter_operators
+  textarea1: string_filter_operators
+  textarea2: string_filter_operators
+  date_created: date_filter_operators
+  date_created_func: datetime_function_filter_operators
+  date_updated: date_filter_operators
+  date_updated_func: datetime_function_filter_operators
+  _and: [Blogs_filter]
+  _or: [Blogs_filter]
+}
+
 input boolean_filter_operators {
   _eq: Boolean
   _neq: Boolean
@@ -939,6 +1017,15 @@ input create_Block_Grid_input {
   test1: String
   test2: String
   test3: String
+  date_created: Date
+  date_updated: Date
+}
+
+input create_Blogs_input {
+  id: ID
+  field1: String
+  textarea1: String
+  textarea2: String
   date_created: Date
   date_updated: Date
 }
@@ -1606,6 +1693,15 @@ input update_Block_Grid_input {
   test1: String
   test2: String
   test3: String
+  date_created: Date
+  date_updated: Date
+}
+
+input update_Blogs_input {
+  id: ID
+  field1: String
+  textarea1: String
+  textarea2: String
   date_created: Date
   date_updated: Date
 }

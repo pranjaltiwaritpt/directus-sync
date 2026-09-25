@@ -288,6 +288,7 @@ type Subscription {
   directus_deployment_projects_mutated(event: EventEnum): directus_deployment_projects_mutated
   Block_Grid_mutated(event: EventEnum): Block_Grid_mutated
   Test_mutated(event: EventEnum): Test_mutated
+  Blogs_mutated(event: EventEnum): Blogs_mutated
 }
 
 """The `Boolean` scalar type represents `true` or `false`."""
@@ -373,6 +374,23 @@ type Block_Grid_mutated {
   key: ID!
   event: EventEnum
   data: Block_Grid
+}
+
+type Blogs {
+  id: ID!
+  field1: String
+  textarea1: String
+  textarea2: String
+  date_created: Date
+  date_created_func: datetime_functions
+  date_updated: Date
+  date_updated_func: datetime_functions
+}
+
+type Blogs_mutated {
+  key: ID!
+  event: EventEnum
+  data: Blogs
 }
 
 type count_functions {
